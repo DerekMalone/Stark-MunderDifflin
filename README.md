@@ -1,37 +1,59 @@
-# Stark-MunderDifflin [![Netlify Status](https://api.netlify.com/api/v1/badges/4ab7e730-7ed3-4cfd-a988-66195e79a991/deploy-status)](https://app.netlify.com/sites/drt-sortinghat/deploys)
-<!-- update the netlify badge above with your own badge that you can find at netlify under settings/general#status-badges -->
+# MunderDifflin
+Munder Difflin is a full stack application allowing a user to view, filter, and buy paper products. The application allows a user to add paper to a cart and update the amount of items in the cart using full CRUD on the client-side. The server-side, uses authentication to validate the user and allow the user to update their cart and account accordingly. 
 
-Here I am putting an overview of what my project is about. It comes below the name of my project so that others can read what it is about and get more details.
+## Get Started
+```
+git clone https://github.com/DerekMalone/Stark-MunderDifflin.git
+cd Stark-MunderDifflin
+```
+To run the code, paste the above git commands into your terminal. You will need to open an instance of Visual Studio. Select the "Open a project of solution" option. Navigate to the folder that the above git command cloned to. open the Caffe-Cache.sln file. You will need to go to the DBInit.sql file located in the SQL folder. Execute the DBInit.sql file "Ctl+Shift+E". Then "Start" the C# file by selecting the Start command or "F5".
+Once the Server-Side has been successfully started, in your terminal cd into the caffe-cache-client directory. If installed, use the `code .` command to open Visual Studio Code. You will then need to run `npm start` to launch the web application.
 
-[View App](#your-link)
+## About the User 
+- The ideal user for this application is a company or individual who needs high quality paper products.
+- The problem this app solves for them is it allows the user to buy high quality paper from a reputable source with ease and efficiency.
 
-## Get Started <!-- OPTIONAL, but doesn't hurt -->
-PLACE CODE SNIPPET HERE
+## Features 
+- When a user selects a paper product to add to their cart, it is added in real time to their cart.
+- When a user views their cart, they will be able to edit the amount of paper they are purchasing.
+- When a user views their cart, they are able to remove a paper product from their cart.
 
-## About the User <!-- This is a scaled down user persona -->
-- The ideal user for this application is a teacher
-- They have students in their classrooms that they would like to put into random groups and they have a love and passion of Harry Potter
-- The problem this app solves for them is it allows them to get their students involved and excited about being in random groups. The students have felt that the groups have not been so random and based on favorites.
+## Code Snippet
+### Server-Side: 
+``` 
+ [HttpPut("Edit/{id}")]
+        public IActionResult UpdatePaper(int id, [FromBody] Paper paperObj)
+        {
+            try
+            {
+                _paperRepo.UpdatePaper(id, paperObj);
 
-## Features <!-- List your app features using bullets! Do NOT use a paragraph. No one will read that! -->
-- When a new student is added an object should be created and that object should be pushed into an array of students that then prints to the DOM.
-- House Colors: The color of the student's card changes depending on which house they were sorted.
-- Card Ordering: Sort the student cards by some criteria (i.e. alphabetically by name, by house)
-- Voldermort's Army: Create a separate container of cards that hold the cards for students that have been expelled. These should be styled differently from Hogwarts students.
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+        }
+```
 
-## Video Walkthrough of APP NAME <!-- A loom link is sufficient -->
-https://www.loom.com/share/829b90d831ea441ba2db6bea724af210
+### Client-Side:
+```
+const handleSearch = (e) => {
+        const searchWord = e.target.value;
+        setWordEntered(searchWord);
 
-## Relevant Links <!-- Link to all the things that are required outside of the ones that have their own section -->
-- [Check out the deployed site](#your-link)
-- [Wireframes](#your-link)
-- [Project Board](#your-link)
+        if (searchWord === '') {
+            func({});
+        } else {
+            func(filteredData);
+        }
+    };
 
-## Code Snippet <!-- OPTIONAL, but doesn't hurt -->
-PLACE CODE SNIPPET HERE
-
-## Project Screenshots <!-- These can be inside of your project. Look at the repos from class and see how the images are included in the readme -->
-<img width="1148" alt="Your Alt" src="your-link.png">
+```
 
 ## Contributors
-- [YOUR NAME](https://github.com/your-github-url)
+- [Derek Malone](https://github.com/DerekMalone)
+- [Meseret Gebremariam](https://github.com/Meseret-G)
+- [Daniel Sitarek](https://github.com/dsitarek)
+- [Harika](https://github.com/hcodes11)
